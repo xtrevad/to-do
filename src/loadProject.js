@@ -1,10 +1,14 @@
-import { getProjectArr } from './logic';
+import { getProjectArr, newToDoItem, spliceFromArr } from './logic';
+import { showSelectedProject } from './displayController';
 
 function loadProject(projectHTML) {
   console.log(`you have clicked on: Project Data ID ${projectHTML}`);
-  projectHTML.classList.add('active-project');
+  showSelectedProject(projectHTML);
   const p = getProjectArr(projectHTML.dataset.id - 1);
-  console.log(p);
+  // console.log(p.toDoItems[0].getSummary());
+  p.toDoItems.forEach((item) => {
+    console.log(item.getSummary());
+  });
 
   // TODO: once clicked and the activated project is loaded, set the
   // todo: correponding DOM element to have the 'active-project' class
@@ -21,4 +25,9 @@ function renameProject() {
   getProjectArr(event.target.dataset.id - 1).title = event.target.textContent;
 }
 
-export { loadProject, renameProject };
+function deleteProject(projectHTML) {
+  const p = projectHTML.dataset.id - 1;
+  spliceFromArr(p);
+}
+
+export { loadProject, renameProject, deleteProject };

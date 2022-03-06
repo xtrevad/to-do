@@ -10,14 +10,6 @@ function getProjectArrLength() {
   return projectsArr.length;
 }
 
-// Maps project name in the DOM with its title
-function mapProjectName() {
-  const p = document.querySelectorAll('.project');
-  p.forEach((project) => {
-    // TODO functionality
-  });
-}
-
 function deleteProject() {
   // TODO: Add "x" button to each created project in the sidebar. Upon click, it prompts user "do you want to delete this?"
   // TODO: and if they confirm, then the DOM element AND the associated project object is deleted from projectArr
@@ -26,7 +18,6 @@ function deleteProject() {
 const newProject = (t) => {
   const title = t;
   let toDoItems = [];
-  toDoItems[0] = '';
   return {
     title,
     toDoItems,
@@ -34,6 +25,7 @@ const newProject = (t) => {
 };
 
 const newToDoItem = (title, content, dueDate, priority, completed) => {
+  // TODO: make this a modal pop-up!
   const getTitle = () => title;
   const getContent = () => content;
   const getDueDate = () => dueDate;
@@ -57,6 +49,15 @@ function pushToArr(project) {
   projectsArr.push(project);
 }
 
+function spliceFromArr(i) {
+  projectsArr.splice(i, i + 1);
+}
+
+function pushToDoToProject(item) {
+  const activeProjHTML = document.querySelector('.active-project');
+  const activeProj = getProjectArr(activeProjHTML.dataset.id - 1);
+  activeProj.toDoItems.push(item);
+}
 // Load a project by clicking on it
 
 function makeProjectsClickable() {
@@ -64,8 +65,6 @@ function makeProjectsClickable() {
   const projects = Array.from(projectListItems);
   projects.forEach((project) => {
     project.addEventListener('click', () => {
-      project.classList.remove('active-project');
-      // ! this doesn't work^
       loadProject(project);
     });
   });
@@ -74,8 +73,10 @@ function makeProjectsClickable() {
 export {
   newToDoItem,
   pushToArr,
+  spliceFromArr,
   newProject,
   getProjectArr,
   getProjectArrLength,
   makeProjectsClickable,
+  pushToDoToProject,
 };

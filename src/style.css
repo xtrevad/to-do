@@ -32,3 +32,12 @@
 .active-project {
   border: 1px solid green;
 }
+
+.card {
+  border: 1px solid blue;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
