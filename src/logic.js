@@ -1,4 +1,9 @@
 import { loadProject } from './loadProject';
+import {
+  selectDefaultProject,
+  refIDFix,
+  showSelectedProject,
+} from './displayController';
 
 let projectsArr = [];
 
@@ -10,9 +15,8 @@ function getProjectArrLength() {
   return projectsArr.length;
 }
 
-function deleteProject() {
-  // TODO: Add "x" button to each created project in the sidebar. Upon click, it prompts user "do you want to delete this?"
-  // TODO: and if they confirm, then the DOM element AND the associated project object is deleted from projectArr
+function getProjectArrActual() {
+  return projectsArr;
 }
 
 const newProject = (t) => {
@@ -24,13 +28,12 @@ const newProject = (t) => {
   };
 };
 
-const newToDoItem = (title, content, dueDate, priority, completed) => {
+const newToDoItem = (title, content, dueDate, priority) => {
   // TODO: make this a modal pop-up!
   const getTitle = () => title;
   const getContent = () => content;
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
-  const getCompleted = () => completed;
   const getSummary = () => {
     return `${title}: ${content}. Must be completed by ${dueDate}. Priority: ${priority}`;
   };
@@ -40,7 +43,6 @@ const newToDoItem = (title, content, dueDate, priority, completed) => {
     getContent,
     getDueDate,
     getPriority,
-    getCompleted,
     getSummary,
   };
 };
@@ -50,11 +52,14 @@ function pushToArr(project) {
 }
 
 function spliceFromArr(i) {
-  projectsArr.splice(i, i + 1);
+  delete projectsArr[i];
+  console.table(projectsArr);
+  // projectsArr.splice(i, i + 1);
 }
 
 function pushToDoToProject(item) {
   const activeProjHTML = document.querySelector('.active-project');
+  console.log('THIS IS ACTIVE: ' + activeProjHTML);
   const activeProj = getProjectArr(activeProjHTML.dataset.id - 1);
   activeProj.toDoItems.push(item);
 }
@@ -65,7 +70,8 @@ function makeProjectsClickable() {
   const projects = Array.from(projectListItems);
   projects.forEach((project) => {
     project.addEventListener('click', () => {
-      loadProject(project);
+      // refIDFix();
+      showSelectedProject(project);
     });
   });
 }
@@ -79,4 +85,5 @@ export {
   getProjectArrLength,
   makeProjectsClickable,
   pushToDoToProject,
+  getProjectArrActual,
 };

@@ -25,13 +25,16 @@ function loadHome() {
   newProjectBtn.textContent = 'New Project';
   sList.appendChild(newProjectBtn);
   // Card container
-  const cardContainer = document.createElement('div');
-  cardContainer.id = 'card-container';
-  c.appendChild(cardContainer);
+  const cardCContainer = document.createElement('div');
+  cardCContainer.id = 'card-c-container';
+  c.appendChild(cardCContainer);
   const newToDoBtn = document.createElement('button');
   newToDoBtn.id = 'new-todo-btn';
   newToDoBtn.textContent = 'New Item';
-  cardContainer.appendChild(newToDoBtn);
+  cardCContainer.appendChild(newToDoBtn);
+  const cardContainer = document.createElement('div');
+  cardContainer.id = 'card-container';
+  cardCContainer.appendChild(cardContainer);
 }
 
 export default loadHome;

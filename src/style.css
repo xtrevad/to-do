@@ -7,9 +7,13 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+body {
+  background-color: #ebdab0;
+}
+
 #content {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 200px 1fr;
   grid-template-rows: 1fr 10fr;
   min-height: 100%;
 }
@@ -25,19 +29,208 @@
 
 #sidebar {
   grid-area: 2 / 1 / -1 / 2;
-  border: 1px solid black;
+  border-right: 1px solid rgb(163, 163, 163);
+  margin: 0;
+  padding: 0;
   /* min-height: 90vh; */
 }
 
-.active-project {
-  border: 1px solid green;
+#sidebar-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* #sidebar-list :nth-child(2n) {
+  background-color: rgb(226, 226, 226);
+} */
+
+/* .row:nth-child(2n) {
+  background-color: #fefefe;
+} */
+
+li {
+  list-style: none;
+}
+
+#card-c-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#card-container {
+  width: 500px;
+  margin: 4ch auto;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 5px;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 1ch 3ch;
+  font-weight: 800;
+  font-size: 1rem;
+  background-color: #cba137;
+}
+
+.active-row {
+  transition: all linear 0.1s;
+  background-color: #977727;
+  color: rgb(255, 255, 255);
 }
 
 .card {
-  border: 1px solid blue;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 1fr 5ch;
+  grid-auto-flow: column;
+  border-radius: 5px;
+  padding: 3ch;
+}
+
+.card > div {
+  grid-area: 1 / 2 / 3 / 3;
+  align-self: center;
 }
 
 .row {
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  height: 4ch;
+  align-items: center;
+  border-bottom: 1px solid #aaa;
+}
+
+.high-priority {
+  background-color: rgb(255, 108, 108);
+}
+
+.medium-priority {
+  background-color: rgb(255, 255, 142);
+}
+
+.low-priority {
+  background-color: rgb(160, 255, 160);
+}
+
+.completed {
+  text-decoration: line-through;
+  color: rgb(0, 0, 0);
+  opacity: 0.3;
+  transition: all linear 0.1s;
+  background-color: rgb(122, 122, 122);
+}
+
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #392d0f;
+  color: white;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2px 16px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #ebdab0;
+  margin: auto;
+  padding: 0;
+  top: 35%;
+  border: 1px solid #888;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+.modal-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1ch;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-todo-title {
+  font-size: 1.5rem;
+  height: 3ch;
+  width: 80%;
+}
+
+#modal-todo-content {
+  font-size: 1rem;
+  width: 80%;
+  color: #333;
+}
+
+.modal fieldset {
+  position: relative;
+  border: none;
+  display: grid;
+  grid-template-columns: 10ch 5ch;
+  color: #333;
+}
+
+.modal fieldset legend {
+  font-weight: bold;
+}
+
+.modal button {
+  width: 100%;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 35%;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
